@@ -1,0 +1,8 @@
+package com.imnidasoftware.newsmultiplatform.db
+
+import app.cash.sqldelight.db.SqlDriver
+
+expect class DatabaseDriverFactory {
+
+    fun createDriver(): SqlDriver
+}
