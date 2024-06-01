@@ -1,4 +1,4 @@
-package com.imnidasoftware.newsmultiplatform.android.screens
+package com.imnidasoftware.newsmultiplatform.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,22 +24,33 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.imnidasoftware.newsmultiplatform.sources.application.Source
 import com.imnidasoftware.newsmultiplatform.sources.presentation.SourcesViewModel
-import org.koin.androidx.compose.koinViewModel
+import com.imnidasoftware.newsmultiplatform.ui.screens.elements.ErrorMessage
+import org.koin.compose.koinInject
+
+class SourcesScreen : Screen {
+    @Composable
+    override fun Content() {
+        SourcesScreenContent()
+    }
+
+}
 
 @Composable
-fun SourcesScreen(
-    viewModel: SourcesViewModel = koinViewModel(),
-    onUpButtonClick: () -> Unit
+fun SourcesScreenContent(
+    viewModel: SourcesViewModel = koinInject(),
 ) {
-    val articlesState = viewModel.sourcesState.collectAsState()
+    val sourcesState = viewModel.sourcesState.collectAsState()
 
     Column {
-        AppBar(onUpButtonClick)
+        AppBar()
 
-        if (articlesState.value.error != null)
-            ErrorMessage(articlesState.value.error!!)
+        if (sourcesState.value.error != null)
+            ErrorMessage(sourcesState.value.error!!)
 
         SourcesListView(viewModel)
     }
@@ -48,12 +59,14 @@ fun SourcesScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppBar(
-    onUpButtonClick: () -> Unit,
 ) {
+    val navigator = LocalNavigator.currentOrThrow
     TopAppBar(
         title = { Text(text = "Sources") },
         navigationIcon = {
-            IconButton(onClick = onUpButtonClick) {
+            IconButton(onClick = {
+                navigator.pop()
+            }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Up Button",

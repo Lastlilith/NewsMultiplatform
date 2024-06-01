@@ -2,9 +2,9 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    id("co.touchlab.skie") version "0.6.2"
     kotlin("plugin.serialization") version "1.9.20"
     alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.composeMultiplatformPlugin)
 }
 
 kotlin {
@@ -36,6 +36,17 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
             implementation(libs.sql.coroutines.extensions)
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.components.resources)
+            implementation(compose.material3)
+            implementation(libs.compose.material)
+            implementation(libs.koin.compose)
+            implementation(libs.kamel.image)
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.transitions)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

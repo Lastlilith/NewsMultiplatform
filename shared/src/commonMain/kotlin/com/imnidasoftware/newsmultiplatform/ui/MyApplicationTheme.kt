@@ -1,4 +1,4 @@
-package com.imnidasoftware.newsmultiplatform.android
+package com.imnidasoftware.newsmultiplatform.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.composeMultiplatformPlugin)
 }
 
 android {
@@ -41,23 +42,9 @@ android {
 dependencies {
     implementation(projects.shared)
     implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
-    debugImplementation(libs.compose.ui.tooling)
-
-    //picture loading lib
-    implementation(libs.coil.compose)
-
-    //navigation jetpack compose
-    implementation(libs.androidx.navigation.compose)
 
     //koin
     implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
-
-    //swipe to refresh
-    implementation(libs.accompanist.swiperefresh)
-
-
 }
