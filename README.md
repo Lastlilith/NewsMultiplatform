@@ -5,4 +5,5 @@ It is just using the simple news api to fetch articles as well as sqlDelight for
 
 There are three more branches:
 * master-compose-multiplatform - branch for pure Compose Multiplatform (CMP) code
+* master-compose-multiplatform - branch for pure Compose Multiplatform (CMP) code with desktop support
 
