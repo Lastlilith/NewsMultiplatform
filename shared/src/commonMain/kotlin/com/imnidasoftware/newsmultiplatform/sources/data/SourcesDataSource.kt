@@ -2,13 +2,13 @@ package com.imnidasoftware.newsmultiplatform.sources.data
 
 import com.imnidasoftware.newsmultiplatform.db.NewsMultiplatformDatabase
 
-class SourcesDataSource(private val db: NewsMultiplatformDatabase) {
+class SourcesDataSource(private val db: NewsMultiplatformDatabase?) {
 
     fun getAllSources(): List<SourceRaw> =
-        db.newsMultiplatformDatabaseQueries.selectAllSources(::mapSource).executeAsList()
+        db?.newsMultiplatformDatabaseQueries?.selectAllSources(::mapSource)?.executeAsList() ?: listOf()
 
     fun clearSources() =
-        db.newsMultiplatformDatabaseQueries.removeAllSources()
+        db?.newsMultiplatformDatabaseQueries?.removeAllSources()
 
     private fun mapSource(
         id: String,
@@ -27,7 +27,7 @@ class SourcesDataSource(private val db: NewsMultiplatformDatabase) {
     }
 
     internal fun createSources(sources: List<SourceRaw>) {
-        db.newsMultiplatformDatabaseQueries.transaction {
+        db?.newsMultiplatformDatabaseQueries?.transaction {
             sources.forEach { source ->
                 insertSource(source)
             }
@@ -35,7 +35,7 @@ class SourcesDataSource(private val db: NewsMultiplatformDatabase) {
     }
 
     private fun insertSource(source: SourceRaw) {
-        db.newsMultiplatformDatabaseQueries.insertSource(
+        db?.newsMultiplatformDatabaseQueries?.insertSource(
             source.id,
             source.name,
             source.desc,

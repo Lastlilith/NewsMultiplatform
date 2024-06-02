@@ -12,6 +12,6 @@ val articlesModule = module {
     single<ArticlesService> { ArticlesService(get()) }
     single<ArticlesUseCase> { ArticlesUseCase(get()) }
     single<ArticlesViewModel> { ArticlesViewModel(get()) }
-    single<ArticlesDatasource> { ArticlesDatasource(get()) }
+    single<ArticlesDatasource> { ArticlesDatasource(getOrNull()) }
     single<ArticlesRepository> { ArticlesRepository(get(), get()) }
 }

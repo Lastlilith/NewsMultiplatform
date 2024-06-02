@@ -29,6 +29,11 @@ kotlin {
 
     jvm("desktop")
 
+    js(IR) {
+        binaries.executable()
+        browser()
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
@@ -68,6 +73,12 @@ kotlin {
                 implementation(libs.sql.desktop.driver)
             }
         }
+
+        val jsMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.js)
+            }
+        }
     }
 }
 
@@ -94,3 +105,8 @@ sqldelight {
         }
     }
 }
+
+compose.experimental {
+    web.application {}
+}
+

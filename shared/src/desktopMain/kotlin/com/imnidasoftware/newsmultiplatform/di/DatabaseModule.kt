@@ -6,6 +6,6 @@ import com.imnidasoftware.newsmultiplatform.db.NewsMultiplatformDatabase
 import org.koin.dsl.module
 
 val databaseModule = module {
-    single<SqlDriver> {DatabaseDriverFactory().createDriver()}
+    single<SqlDriver> {DatabaseDriverFactory().createDriver()!!}
     single<NewsMultiplatformDatabase> {NewsMultiplatformDatabase(get())}
 }

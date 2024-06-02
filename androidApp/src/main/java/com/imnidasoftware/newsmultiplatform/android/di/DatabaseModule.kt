@@ -8,6 +8,6 @@ import org.koin.dsl.module
 
 val databaseModule = module {
 
-    single<SqlDriver> { DatabaseDriverFactory(androidContext()).createDriver() }
+    single<SqlDriver> { DatabaseDriverFactory(androidContext()).createDriver()!! }
     single<NewsMultiplatformDatabase> { NewsMultiplatformDatabase(get()) }
 }

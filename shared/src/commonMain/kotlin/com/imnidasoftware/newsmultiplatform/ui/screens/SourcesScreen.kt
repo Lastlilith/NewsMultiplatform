@@ -30,19 +30,20 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.imnidasoftware.newsmultiplatform.sources.application.Source
 import com.imnidasoftware.newsmultiplatform.sources.presentation.SourcesViewModel
 import com.imnidasoftware.newsmultiplatform.ui.screens.elements.ErrorMessage
-import org.koin.compose.koinInject
+import org.koin.core.Koin
 
-class SourcesScreen : Screen {
+class SourcesScreen(val koin: Koin) : Screen {
     @Composable
     override fun Content() {
-        SourcesScreenContent()
+        SourcesScreenContent(koin)
     }
 
 }
 
 @Composable
 fun SourcesScreenContent(
-    viewModel: SourcesViewModel = koinInject(),
+    koin: Koin,
+    viewModel: SourcesViewModel = koin.get(),
 ) {
     val sourcesState = viewModel.sourcesState.collectAsState()
 

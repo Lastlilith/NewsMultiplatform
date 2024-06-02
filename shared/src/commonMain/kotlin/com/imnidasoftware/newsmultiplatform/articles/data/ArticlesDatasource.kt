@@ -2,14 +2,14 @@ package com.imnidasoftware.newsmultiplatform.articles.data
 
 import com.imnidasoftware.newsmultiplatform.db.NewsMultiplatformDatabase
 
-class ArticlesDatasource(private val database: NewsMultiplatformDatabase) {
+class ArticlesDatasource(private val database: NewsMultiplatformDatabase?) {
 
     fun getAllArticles(): List<ArticleRaw> =
-        database.newsMultiplatformDatabaseQueries.selectAllArticles(::mapToArticleRaw)
-            .executeAsList()
+        database?.newsMultiplatformDatabaseQueries?.selectAllArticles(::mapToArticleRaw)
+            ?.executeAsList() ?: listOf()
 
     fun insertArticles(articles: List<ArticleRaw>) {
-        database.newsMultiplatformDatabaseQueries.transaction {
+        database?.newsMultiplatformDatabaseQueries?.transaction {
             articles.forEach { articleRaw ->
                 insertArticle(articleRaw)
             }
@@ -17,10 +17,10 @@ class ArticlesDatasource(private val database: NewsMultiplatformDatabase) {
     }
 
     fun clearArticles() =
-        database.newsMultiplatformDatabaseQueries.removeAllArticles()
+        database?.newsMultiplatformDatabaseQueries?.removeAllArticles()
 
     private fun insertArticle(articleRaw: ArticleRaw) {
-        database.newsMultiplatformDatabaseQueries.insertArticle(
+        database?.newsMultiplatformDatabaseQueries?.insertArticle(
             articleRaw.title,
             articleRaw.desc,
             articleRaw.date,
